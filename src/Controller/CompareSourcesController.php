@@ -160,8 +160,29 @@ class CompareSourcesController extends AbstractController
                 dump(count($params));
 
                 if (count($params) == 2) {
-                    $word1 = $params[0];
-                    $word2 =  $params[1];
+
+                    $translate = new translatewords($params[0], $data['LenguageIn'],  $data['LenguageOut']);
+
+                    $translate->translate($rep);
+                    $resultWord1 = $translate->getTranslation();
+                    $resultsWord1 = $translate->getTranslations();
+                    $equalsWord1 = $translate->getSynonym();
+                    unset($translate);
+
+
+
+                    $translate = new translatewords($params[2], $data['LenguageIn'],  $data['LenguageOut']);
+
+                    $translate->translate($rep);
+                    $resultWord2 = $translate->getTranslation();
+                    $resultsWord2 = $translate->getTranslations();
+                    $equalsWord2 = $translate->getSynonym();
+                    unset($translate);
+
+
+
+                    $word1 =
+                        $word2 =  $params[1];
 
                     preg_match_all('/' . $params[0] . '(.*?) ' . $params[1] . '/', $origin, $match);
                     foreach ($match[0] as $line) {
