@@ -1,0 +1,31 @@
+{#**************************************************************************************************************************************#}
+{% extends 'base.html.twig' %}
+{#**************************************************************************************************************************************#}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+
+	
+	{#**************************************************************************************************************************************#}
+	{# les différents liens vers les services#}
+
+	{% set BaseElement =  resource  %}
+	
+	{% set MODE = 'ressource' %}
+	{% set SWITCH  = 0 %}
+
+	{% set GETALL = 'RGetAll' %}
+
+	{% set RCDELETE = 'RCDelete' %}
+	{% set LABEL = 'Ressource' %}
+	{% set RELATEDLABEL = 'les corpus suivants:' %}
+	
+	{% set EDIT = 'REdit' %}
+	{% set DELETE = 'RDelete' %}
+	
+	{{ include('includes/get.html.twig')  | raw}}
+
+
+{% endblock %}

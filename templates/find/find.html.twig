@@ -1,0 +1,267 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+	{#**************************************************************************************************************************************#}
+	{# create new indicator #}
+	{#**************************************************************************************************************************************#}
+	{{ form_start(form) }}
+
+
+		<div class="alert alert-primary" role="alert"> <h6>Corpus :
+			{{ corpusName }}</h6>
+
+	</div>
+
+
+	<div class="container">
+		<div class="form-row">
+
+
+			<div class="alert alert-primary" role="alert">
+
+				<a data-toggle="collapse" href="#recherche" aria-expanded="false">
+					<h6>Rechercher</h6>
+				</a>
+			</div>
+
+			<div class="collapse show" id="recherche">
+				<div class="col">
+
+
+					<div class="row">
+
+						<div class="col">
+							{{ form_row(form.word)}}
+						</div>
+
+
+						<div class="col">
+							{{ form_row(form.clean, {'checked' : true})}}
+						</div>
+
+
+					</div>
+
+					<div class="row">
+						<div class="col-6">
+
+							{{ form_row(form.choix, {'attr' : {'onChange':'show2()'} })}}
+
+						</div>
+
+					</div>
+
+
+					<hr>
+					<h6>Fréquence</h6>
+					<br<br>
+
+						<div class="row">
+							<div class="col">
+								{{ form_row(form.min)}}
+							</div>
+
+							<div class="col">
+								{{ form_row(form.max)}}
+							</div>
+
+							<div class="col">
+								{{ form_row(form.tab)}}
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="col">
+								{{ form_row(form.sorted) }}
+							</div>
+							<div class="col">
+								<div align="right">
+									{{ form_row(form.analyse) }}
+								</div>
+							</div>
+
+
+						</div>
+
+					</div>
+				</div>
+
+
+			</div>
+			<br><hr>
+			{{ form_end(form) }}
+
+			{% set j = 0 %}
+
+			{% if mode == 'Mots' %}
+				{% if words == null  %}
+
+					<div class="alert alert-primary" role="alert">
+						Aucun résultat trouvé</div>
+
+				{% else %}
+
+
+					{% for ligne in words %}
+
+						<div class="alert alert-info" role="alert">
+
+							Resource :{{ ligne[0] }}<br>
+
+
+							<td>
+								Le mot :"{{ ligne[1].name }}" est répété :<span class="badge">{{ ligne[1].value }}</span>
+							</td>
+
+
+						</div>
+					{% endfor %}
+
+				{% endif %}
+			{% endif %}
+
+			{% if mode == 'Frequence' %}
+
+
+				{% for lignes in results %}
+
+					<div class="card">
+						<div class="alert alert-primary">
+							<a data-toggle="collapse" href="#view{{j}}" aria-expanded="false">
+								<h6>{{lignes   [0]}}</h6>
+							</a>
+
+
+						</div>
+
+						<div class="collapse show" id="view{{j}}">
+
+							<div class="alert alert-success" role="alert">
+								Total des mots:<br>
+								Fréquence Max:{{max}}<br>
+							</div>
+
+
+							<div class="alert alert-secondary" role="alert">
+
+								<a data-toggle="collapse" href="#viewFrequnce{{j}}" aria-expanded="false">
+									Les fréquences
+								</a>
+
+								<a class="float-right" href={{path( 'IView' , { 'type' : 'bar' , 'page' : '1','id' : j } )}}>
+									<i class='fas fa-chart-pie fa-2x' title='Visualiser' style="color: #99184F;"></i>
+									&nbsp;
+								</a>
+
+							</div>
+
+							<div class="collapse" id="viewFrequnce{{j}}">
+
+								<div class="table">
+									<table class="table  table-bordered">
+										<tbody>
+											<tr>
+												{% set i = 0 %}
+
+												{% for i in 0.. tab - 1 %}
+													<th>Mot</th>
+
+												{% endfor %}
+
+												{% set i = 0 %}
+
+												{% for  ligne in lignes[1]  %}
+
+
+													{% if i % tab == 0 %}
+													</tr>
+													<tr>
+													{% endif %}
+
+
+													<td>{{ ligne[0] }}
+														<span class="badge">
+															{{ ligne[1] }}</span>
+													</td>
+
+
+													{% set i = i + 1 %}
+
+												{% endfor %}
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+
+							{% if mode == 'Mot' %}
+
+
+								<div class="alert alert-secondary" role="alert">
+
+									<a data-toggle="collapse" href="#viewStat{{j}}" aria-expanded="false">
+										Les stats
+									</a>
+								</div>
+
+								<div class="collapse" id="viewStat{{j}}">
+
+									<div class="px-6">
+
+
+										<div class="table">
+											<table class="table  table-bordered">
+												<tbody>
+													<tr>
+														{% set i = 0 %}
+
+														{% for i in 0.. tab - 1 %}
+															<th scope="col">Mots différents</th>
+															<th scope="col">sont répétés</th>
+														{% endfor %}
+
+														{% set i = 0 %}
+
+
+														{% for cle,res in lignes.Stat %}
+
+															{% if i % tab == 0 %}
+															</tr>
+															<tr>
+															{% endif %}
+
+															<td>{{ res }}</td>
+															<td>{{ cle }}</td>
+
+
+															{% set i = i + 1 %}
+
+
+														{% endfor %}
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+
+										<p></p>
+									</div>
+								</div>
+							{% endif %}
+
+						</div>
+
+					</div>
+					<br><br>
+					{% set j = j + 1 %}
+
+				{% endfor %}
+
+			{% endif %}
+		</div>
+	</div>
+</script>{% endblock %}

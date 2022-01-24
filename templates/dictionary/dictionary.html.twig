@@ -1,0 +1,129 @@
+{#**************************************************************************************************************************************#}
+{% extends 'base.html.twig' %}
+{#**************************************************************************************************************************************#}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+
+	{{ form_start(form) }}
+
+
+	<button class="btn btn-primary" data-toggle="modal" data-target="#ajouter">
+		<i class="fas fa-plus-circle"></i>
+	</button>
+
+
+	<div class="modal" tabindex="-1" role="dialog" id="ajouter">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Ajouter</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="modal-body">
+
+						<div class="container">
+							<div class="row">
+								<div class="col">
+									{{ form_row(form.word, { 'label': 'Mot' })}}
+								</div>
+								<div class="col">
+									{{ form_row(form.translate, { 'label': 'Traduction' })}}
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col">
+									{{ form_row(form.lang, { 'label': 'Langue Source' })}}
+								</div>
+								<div class="col">
+									{{ form_row(form.langDest, { 'label': 'Langue Traduction' })}}
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col">
+									{{ form_row(form.translated, { 'label': 'Traductions' })}}
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									{{ form_row(form.elquals, { 'label': 'Synonymes' })}}
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+					<button type="submit" class="btn btn-primary">Ajouter</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	{{ form_end(form) }}
+
+	{#**************************************************************************************************************************************#}
+
+
+	<div class="table-wrapper">
+
+		<table class="table table-striped ">
+
+			<thead>
+				<tr>
+					<th>Mot</th>
+					<th>Langue</th>
+					<th>Traduction</th>
+					<th>Autres traductions</th>
+					<th>Synonymes</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+
+			<tbody>
+
+				{% for ligne in result %}
+					<tr>
+						<td>{{ ligne.getWord }}</td>
+						<td>{{ ligne.lang}}</td>
+						<td>{{ ligne.getTranslate }}</td>
+						<td>{{ ligne.getTranslated }}</td>
+						<td>{{ ligne.getElquals }}</td>
+
+						<td>
+							<a href={{path('DictionaryEDIT', {'id':ligne.id } )}} title="Editer">
+								<i class="fas fa-marker"></i>
+							</a>
+						</td>
+
+						<td>
+							<a href={{path('DictionaryDELETE', {'id':ligne.id } )}} onclick="return confirm('Voulez-vous me supprimer ?')" title="Supprimer?">
+								<i class="fas fa-trash"></i>
+							</a>
+						</td>
+
+
+					</tr>
+
+				{% endfor %}
+
+			</tbody>
+
+		</table>
+
+		<p></p>
+		<p></p>
+	</div>
+
+
+{% endblock %}

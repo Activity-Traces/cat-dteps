@@ -1,0 +1,128 @@
+
+<div class="panel panel-default">
+  <div class="panel-body"></div>
+
+
+				<button type="button" class="btn btn-info">
+					   <a href={{path( GETALL )}} title="Les {{ LABEL }}">
+						<i class='fas fa-th-list' title='Retour aux  {{ LABEL }} '></i>
+					</a>
+				</button>
+
+
+				<button type="button" class="btn btn-info">
+		            <a href={{path( EDIT , {'id': BaseElement.id } )}} title="Editer">
+
+						<i class='fas fa-marker' title='Retour aux  {{ LABEL }} '></i>
+					</a>
+				</button>
+				
+				<button type="button" class="btn btn-info">
+		<a href={{path( DELETE, {'id':BaseElement.id } )}} onclick="return confirm('Voulez-vous me supprimer ?')" title="Supprimer?">
+			<i class="fas fa-trash"></i>
+		</a>
+
+
+</div>
+<p><p>
+
+		<div class="card card-body"> <label for="smFormGroupInput" class=" col-form-label-lg">
+			{{ BaseElement.nom }} </label>
+
+		<label for="smFormGroupInput" class=" col-form-label-sm">
+			
+			<h6>
+				Description :
+				<strong>{{ BaseElement.description }}</strong>
+			</h6>
+{% if MODE == 'resource' %}
+			<h6>
+				Source de données :
+				<strong>{{ BaseElement.resourceFile }}</strong>
+			</h6>
+{% endif %}
+
+{% if MODE == 'corpus' %}
+			<h6>
+				Crée le  :
+				<strong>{{ BaseElement.createdAt |date("m/d/Y  h:m:s ") }}</strong>
+			</h6>
+{% endif %}
+
+
+{% if MODE == 'evaluation' %}
+			<h6>
+				Règles d'évaluation  :
+				<strong>{{ evaluation.regles }}</strong>
+			</h6>
+{% endif %}
+		</label>
+
+	</div>
+
+	{#**************************************************************************************************************************************#}
+{% if MODE != 'evaluation' %}
+	<div>
+
+		<hr>
+		<label>
+			<h6> Je suis en relation avec {{ RELATEDLABEL }} <h6></label>
+				<p></p>
+			</div>
+
+			<table class="table">
+
+				<thead>
+					<tr>
+						<th>Identifiant</th>
+						<th>Nom</th>
+						<th>Description</th>
+						<th>Supprimer</th>
+					</tr>
+				</thead>
+
+				<tbody>
+
+
+{% if MODE == 'ressource' %}
+{% set Element = BaseElement.hasCorpus %}
+{% endif %}
+
+
+
+{% if MODE == 'corpus' %}
+    {% set Element = BaseElement.hasResource %}
+{% endif %}
+
+
+
+					{% for RelatedElement in Element %}
+
+						<tr>
+							<td>{{ RelatedElement.id }}</td>
+							<td>{{ RelatedElement.nom }}</td>
+							<td>{{ RelatedElement.description }}</td>
+
+							<td>
+							{% if SWITCH == 1 %}
+								<a href="{{path( RCDELETE, {'Corpus':BaseElement.id, 'id':RelatedElement.id , 'resourceid' : RelatedElement.id, 'mode' : SWITCH } )}}" title="Supprmier?" onclick="return confirm('Voulez-vous me dissocier ?')">
+							{% endif %}
+
+							{% if SWITCH == 0 %}
+								<a href="{{path( RCDELETE, {'Corpus':RelatedElement.id, 'id':BaseElement.id , 'resourceid' : BaseElement.id, 'mode' : SWITCH } )}}" title="Supprmier?" onclick="return confirm('Voulez-vous me dissocier ?')">
+							{% endif %}
+							
+
+									<i class="fas fa-trash"></i>
+								</a>
+							</td>
+						</tr>
+
+					{% endfor %}
+				</tbody>
+
+		</table>
+{% endif %}	
+
+			{#**************************************************************************************************************************************#}
+			{#**************************************************************************************************************************************#}

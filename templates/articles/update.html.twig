@@ -1,0 +1,86 @@
+{#**************************************************************************************************************************************#}
+{% extends 'base.html.twig' %}
+{#**************************************************************************************************************************************#}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+	{{ form_start(form) }}
+
+	<div class="container">
+
+
+		<div class="alert alert-primary" role="alert">
+
+			<a data-toggle="collapse" href="#articles" aria-expanded="false">
+				<h6>Ajouter une article</h6>
+			</a>
+		</div>
+
+		<div class="collapse show" id="articles">
+
+
+			<div class="row g-3">
+				<div class="col-sm">
+					{{ form_row(form.auteur, { 'label': 'Auteurs' })}}
+				</div>
+				<div class="col-sm">
+					{{ form_row(form.titre, { 'label': 'Titre' })}}
+				</div>
+
+
+			</div>
+
+
+			<div class="row g-3">
+				<div class="col-sm">
+					{{ form_row(form.periode,  { 'label': 'Année' })}}
+				</div>
+				<div class="col-sm">
+					{{ form_row(form.numero_parent, { 'label': 'Numéro de parition' })}}
+				</div>
+				<div class="col-sm">
+					{{ form_row(form.href_parent, { 'label': 'identifiant' }, )}}
+				</div>
+
+			</div>
+
+
+			<div class="row g-3">
+
+				<div class="col-sm">
+					{{ form_row(form.resume_fr)}}
+				</div>
+			</div>
+
+			<div class="row g-3">
+
+				<div class="col-sm">
+					{{ form_row(form.resume_en)}}
+				</div>
+			</div>
+
+			<div class="row g-3">
+
+				<div class="col-sm">
+					{{ form_row(form.contenu)}}
+				</div>
+			</div>
+
+
+			<div class="row g-3">
+
+				<div class="col-sm">
+					{{ form_row(form.biblio)}}
+				</div>
+			</div>
+
+			<button type="submit" class="btn btn-primary">Mettre à jour l'article</button>
+			<br>
+			<br>
+
+		</div>
+	</div>
+	{{ form_end(form) }}
+{% endblock %}

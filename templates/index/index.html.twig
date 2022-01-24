@@ -1,0 +1,148 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+
+	<h5>
+		<section>
+			<div class="alert alert-white">
+
+				<h4 class="fw-light">DTEPS-CAT</h4>
+				<p></p>
+				<h5 class="fw-light">
+					Corpus Analysis Tools.
+					<br>Le service du gestion et du traitement des corpus pour le pole ELLIADD/DTEPS
+				</h5>
+			</div>
+			<hr>
+			<br>
+		</section>
+
+		<div class="row">
+			<div class="col">
+				<div class="card" style="">
+					<div class="card-body " style="text-align: center">
+						<h5 class="card-title"></h5>
+						<p class="card-text">
+
+							<a href={{path('CGetAll')}}>
+								<i class='fas fa-book fa-2x' title='Mes corpus' style="color: #8E44AD;"></i>
+								&nbsp;
+							</a>
+
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card" style="">
+					<div class="card-body " style="text-align: center">
+						<h5 class="card-title"></h5>
+						<p class="card-text">
+
+							<a href={{path('CGetAll')}}>
+								<i class='fas fa-file-alt fa-2x' title='Mes resources' style="color: #16A085;"></i>
+								&nbsp;
+							</a>
+
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card" style="">
+					<div class="card-body " style="text-align: center">
+						<h5 class="card-title"></h5>
+						<p class="card-text">
+
+							<a href={{path('RGetAll')}}>
+								<i class='fas fa-link fa-2x' title='Lier les resources aux corpus' style="color: #F1C40F;"></i>
+								&nbsp;
+							</a>
+
+
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card" style="">
+					<div class="card-body " style="text-align: center">
+						<h5 class="card-title"></h5>
+						<p class="card-text">
+
+							<a href={{path('RCLink')}}>
+								<i class='fas fa-search fa-2x' title='Rechercher' style="color: #2980B9;"></i>
+
+							</a>
+						</p>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+		<hr>
+
+		<div class="row">
+			<div class="col">
+				<div class="card" style="">
+					<div class="card-body " style="text-align: center">
+						<h5 class="card-title"></h5>
+						<p class="card-text">
+							<a href={{path('initfind')}}>
+								<i class='fas fa-text-height fa-2x' title='Rechercher et Comparer' style=" color: #2980B9;"></i>
+								&nbsp;
+							</a>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card" style="">
+					<div class="card-body " style="text-align: center">
+						<h5 class="card-title"></h5>
+						<p class="card-text">
+
+							<a href={{path('initfind')}}>
+								<i class='fas fa-exchange-alt fa-2x' title='Convertir' style="color:  #2ECC71;"></i>
+								&nbsp;
+							</a>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card" style="">
+					<div class="card-body " style="text-align: center">
+						<h5 class="card-title"></h5>
+						<p class="card-text">
+							<a href="{{path('PGetAll')}}">
+								<i class='fas fa-database fa-2x' title='Mes partages' style="color: #E67E22;"></i>
+								&nbsp;
+							</a>
+
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card" style="">
+					<div class="card-body " style="text-align: center">
+						<h5 class="card-title"></h5>
+						<p class="card-text">
+							<a href="{{path('getDictionary')}}">
+								<i class='fas fa-server fa-2x' title='Dictionnaire' style=" color: #BDC3C7;"></i>
+								&nbsp;
+							</a>
+
+						</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	{% endblock %}

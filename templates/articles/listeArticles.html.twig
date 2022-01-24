@@ -1,0 +1,60 @@
+<div
+	class="card card-cascade narrower">
+
+
+	{#**************************************************************************************************************************************#}
+
+	<div class="px-4">
+
+		<div class="table-wrapper">
+
+			<table class="table table-striped ">
+
+				<thead>
+					<tr>
+						<th>Auteur</th>
+						<th>Titre</th>
+						<th>Résumé</th>
+						<th></th>
+
+						<th></th>
+
+					</tr>
+				</thead>
+
+				<tbody>
+
+					{% for ligne in result %}
+						<tr>
+							<td>{{ ligne.titre }}</td>
+							<td>{{ ligne.auteur }}</td>
+							<td>{{ ligne.resume_fr }}</td>
+
+
+							<td>
+								<a href={{path( ArticleEDIT , {'id':ligne.id } )}} title="Editer">
+									<i class="fas fa-marker"></i>
+								</a>
+							</td>
+
+							<td>
+								<a href={{path(ArticleDELETE, {'id':ligne.id } )}} onclick="return confirm('Voulez-vous me supprimer ?')" title="Supprimer?">
+									<i class="fas fa-trash"></i>
+								</a>
+							</td>
+
+
+						</tr>
+
+					{% endfor %}
+
+				</tbody>
+
+			</table>
+
+		</div>
+		<p></p>
+		<p></p>
+	</div>
+
+</div>

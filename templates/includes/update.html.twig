@@ -1,0 +1,43 @@
+<div class="card card-body">
+
+	{{ form_start(form) }}
+
+	{{ form_row(form.nom, {'attr': {'rows' : '8', 'placeholder' : "Donner un nom "}}) }}
+	{{ form_row(form.description, {'attr': {'rows' : '8', 'placeholder' : "Donner une description  "}}) }}
+
+	{% if LABEL == 'evaluation' %}
+		{{ form_row(form.regles, {'attr': {'placeholder' : "Donner un nom  "}})  }}
+	{% endif %}
+
+	{% if LABEL == 'ressource' %}
+		{{ form_row(form.resourceFile, {'attr': {'rows' : '8', 'placeholder' : "Selectionner la ressource", 'accept' : 'application/xml'} }) }}
+	{% endif %}
+
+
+	<p>
+
+		{% set buttonlabel = '' %}
+
+		{% if action =='Add' %}
+
+			{% set buttonlabel = 'Ajouter' %}
+		{% endif %}
+
+		{% if action =='Edit' %}
+
+			{% set buttonlabel = 'Editer' %}
+		{% endif %}
+
+
+		<div align="right">
+
+			<button type="submit" class="btn btn-info">
+
+				{{ buttonlabel }}
+
+			</button>
+		</div>
+
+
+		{{ form_end(form) }}
+	</p>

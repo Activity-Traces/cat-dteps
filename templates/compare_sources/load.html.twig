@@ -1,0 +1,42 @@
+{#**************************************************************************************************************************************#}
+{% extends 'base.html.twig' %}
+{#**************************************************************************************************************************************#}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+
+	{{ form_start(form) }}
+
+
+	<div class="row g-3">
+		<div class="col-sm">
+
+
+			<div class="alert alert-primary" role="alert">
+
+				{{ form_row(form.resourcesleft) }}
+			</div>
+
+
+		</div>
+		<div class="col-sm">
+
+
+			<div class="alert alert-info" role="alert">
+
+				{{ form_row(form.resourcesright) }}
+			</div>
+
+
+		</div>
+
+	</div>
+	<div>
+		<button type="submit" class="btn btn-primary">Charger les ressources sélectionnées</button>
+	</div>
+
+	{{ form_end(form) }}
+
+{% endblock %}

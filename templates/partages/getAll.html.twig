@@ -1,0 +1,71 @@
+{#**************************************************************************************************************************************#}
+{% extends 'base.html.twig' %}
+{#**************************************************************************************************************************************#}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+	<div class="px-4">
+
+		<div class="table-wrapper">
+
+			<table class="table table-hover mb-0">
+
+				<thead>
+					<tr>
+						<th class="">Titre</th>
+						<th class="">Description</th>
+						<th class="">Auteur</th>
+						<th class="">Resources partagés</th>
+					</tr>
+				</thead>
+
+
+				<tbody>
+
+					{% for ligne in result %}
+						{% set DIRECTORY = 'uploads/resources/'~ app.user.email ~ '/' %}
+
+						<tr>
+							<td>{{ ligne.nom }}</td>
+							<td>{{ ligne.description }}</td>
+							<td>{{ ligne.hasUser.getEmail() }}</td>
+
+
+							<td>
+								<ul class="list-group">
+
+									{% set Element = ligne.hasResource %}
+
+									{% for RelatedElement in Element %}
+
+
+										{% if  RelatedElement.verou == 1  %}
+											<li class="list-group-item">{{ RelatedElement.nom }}
+
+												<a href="{{ asset( DIRECTORY ~ RelatedElement.resourceFile ) }}" style="float: right;">
+													<i class="far fa-file-alt"></i>
+												</a>
+
+											</li>
+										{% endif %}
+
+
+									{% endfor %}
+								</ul>
+
+
+							</td>
+
+
+						</tr>
+
+					{% endfor %}
+
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+{% endblock %}

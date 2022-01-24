@@ -1,0 +1,28 @@
+{#**************************************************************************************************************************************#}
+{% extends 'base.html.twig' %}
+{#**************************************************************************************************************************************#}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+	{#**************************************************************************************************************************************#}
+	{# les différents liens vers les services#}
+
+	{% set BaseElement =  corpus  %}
+	
+	{% set LABEL = 'Corpus' %}
+	{% set RELATEDLABEL = 'les ressources suivantes:' %}	
+
+	{% set MODE = 'corpus' %}
+	{% set SWITCH  = 1 %}
+
+	{% set GETALL = 'CGetAll' %}
+	{% set RCDELETE = 'RCDelete' %}
+	{% set EDIT = 'CEdit' %}
+	{% set DELETE = 'CDelete' %}
+	
+	{{ include('includes/get.html.twig')  | raw}}
+
+
+{% endblock %}

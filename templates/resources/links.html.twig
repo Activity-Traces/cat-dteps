@@ -1,0 +1,71 @@
+{#**************************************************************************************************************************************#}
+{% extends 'base.html.twig' %}
+{#**************************************************************************************************************************************#}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+	{#**************************************************************************************************************************************#}
+
+		<div class="px-4">
+		<p> Veuillez choisir un Corpus <p>
+
+		{{ form_start(form) }}
+
+			<div class="row">
+			
+				<div class="form-group col-md-6">
+					{{ form_row(form.corpus, {'attr': {'onchange': "this.form.submit()"}} ) }}
+				</div>
+
+				<div class="form-group col-md-6">
+					{{ form_row(form.done ) }}
+				</div>
+
+				
+				{%  if form.corpus.vars.data.id is defined %}
+
+						
+						</div>
+					
+							<div class="table-wrapper">
+								<table class="table table-hover mb-0">
+
+									<thead>
+										<tr>
+											<th>Toutes les resources</th>
+											<th></th>
+
+										</tr>
+									</thead>
+
+									<tbody>
+
+
+											{% for ligne in result %}
+												<tr>
+													<td>{{ ligne.nom }}</td>
+													<td>
+															{% if (form.corpus.vars.data.getHasResource.contains(ligne) ) %}
+																<input type="checkbox"  name ="resourcein[]"   value= "{{ ligne.id }}" checked>
+															{% else %}
+																<input type="checkbox"  name ="resourcein[]" value= "{{ ligne.id }} "  >
+															{% endif %}										
+													</td>
+												</tr>
+										
+											{% endfor %}
+									</tbody>
+
+								</table>
+
+							</div>
+						</div>
+
+
+				{% endif %}
+		</div>
+		{{ form_end(form) }}
+
+
+{#**************************************************************************************************************************************#}{% endblock %}

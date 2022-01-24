@@ -1,0 +1,139 @@
+{{ form_start(form) }}
+{{ form_row(form.search, {'attr': {'placeholder' :  PLACEHOLDER }}) }}
+{{ form_end(form) }}
+
+
+<div class="card card-cascade narrower">
+
+	<div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3
+																																																																																																																																																																																																												                d-flex justify-content-between align-items-center">
+
+		<h6>Liste des
+			{{ RELATED }}
+		</h6>
+
+		<div>
+
+			<button type="button" class="btn btn-info">
+				<a href="{{path( ADD )}}">
+					<i class='fas fa-plus' title='Ajouter un nouveau {{ RELATED }} '></i>
+				</a>
+			</button>
+
+
+			<button type="button" class="btn btn-info">
+				<a href="{{path( DELETEALL )}}">
+					<i class='fas fa-trash' title="Supprimer tous les {{ RELATED }} " onclick="return confirm('Voulez vous tout supprimer tous les {{ RELATED }} ? ')"></i>
+				</a>
+			</button>
+
+			<button type="button" class="btn btn-info">
+				<i class="fas fa-info-circle mt-0"></i>
+			</button>
+		</div>
+
+	</div>
+
+	{#**************************************************************************************************************************************#}
+
+	<div class="px-4">
+
+		<div class="table-wrapper">
+
+			<table class="table table-striped ">
+
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Déscription</th>
+						{% if RESOURCEVIEW is defined %}
+
+							<th>Ressource</th>
+						{% else %}
+							<th></th>
+
+						{% endif %}
+
+						<th></th>
+						<th></th>
+						<th></th>
+
+						{% if SHARED is defined %}
+							<th></th>
+						{% endif %}
+
+
+					</tr>
+				</thead>
+
+				<tbody>
+
+					{% for ligne in result %}
+						<tr>
+							<td>{{ ligne.nom }}</td>
+							<td>{{ ligne.description }}</td>
+							<td>
+								{% if RESOURCEVIEW is defined %}
+									{% set DIRECTORY = 'uploads/'~ app.user.email ~ '/resources/' %}
+
+
+									<a href="{{ asset(DIRECTORY ~ ligne.resourceFile) }}">
+										<i class="far fa-file-alt"></i>
+									</a>
+
+								{% endif %}
+							</td>
+
+
+							<td>
+								<a href={{path( GET , {'id':ligne.id } )}} title="Détails">
+									<i class="fas fa-eye"></i>
+								</a>
+							</td>
+							<td>
+								<a href={{path( EDIT , {'id':ligne.id } )}} title="Editer">
+									<i class="fas fa-marker"></i>
+								</a>
+							</td>
+
+							<td>
+								<a href={{path(DELETE, {'id':ligne.id } )}} onclick="return confirm('Voulez-vous me supprimer ?')" title="Supprimer?">
+									<i class="fas fa-trash"></i>
+								</a>
+							</td>
+
+							{% if SHARED is defined %}
+
+								{% if not ligne.verou %}
+									<td>
+										<a href={{path(ALLOW, {'id':ligne.id } )}} title="Partager" onclick="return confirm('Voulez-vous me partager ?')" title="Partager?">
+											<i class="fas fa-atlas"></i>
+										</a>
+									</td>
+
+								{% else %}
+
+									<td>
+										<a href={{path( ALLOW, {'id':ligne.id } )}} title="Ne pas partager" onclick="return confirm('Voulez-vous me retirer de la liste des partages ')" title="Ne pas partager?">
+											<i class="fas fa-atlas" style="color: #A00944;"></i>
+										</a>
+									</td>
+
+								{% endif %}
+
+							{% endif %}
+
+						</tr>
+
+					{% endfor %}
+
+				</tbody>
+
+			</table>
+
+		</div>
+		<p></p>
+		<p></p>
+	</div>
+
+</div>

@@ -1,0 +1,163 @@
+{#**************************************************************************************************************************************#}
+{% extends 'base.html.twig' %}
+{#**************************************************************************************************************************************#}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+
+	{{ form_start(form) }}
+
+	<div class="container">
+
+
+		<div class="alert alert-primary" role="alert">
+
+			<a data-toggle="collapse" href="#articles" aria-expanded="false">
+				<h6>Ajouter une article</h6>
+			</a>
+		</div>
+
+		<div class="collapse show" id="articles">
+
+
+			<div class="row g-3">
+				<div class="col-sm">
+					{{ form_row(form.auteur, { 'label': 'Auteurs' })}}
+				</div>
+				<div class="col-sm">
+					{{ form_row(form.titre, { 'label': 'Titre' })}}
+				</div>
+
+
+			</div>
+
+
+			<div class="row g-3">
+				<div class="col-sm">
+					{{ form_row(form.periode,  { 'label': 'Année' })}}
+				</div>
+				<div class="col-sm">
+					{{ form_row(form.numero_parent, { 'label': 'Numéro de parition' })}}
+				</div>
+				<div class="col-sm">
+					{{ form_row(form.href_parent, { 'label': 'identifiant' }, )}}
+				</div>
+
+			</div>
+
+
+			<div class="row g-3">
+
+				<div class="col-sm">
+					{{ form_row(form.resume_fr)}}
+				</div>
+			</div>
+
+			<div class="row g-3">
+
+				<div class="col-sm">
+					{{ form_row(form.resume_en)}}
+				</div>
+			</div>
+
+			<div class="row g-3">
+
+				<div class="col-sm">
+					{{ form_row(form.contenu)}}
+				</div>
+			</div>
+
+
+			<div class="row g-3">
+
+				<div class="col-sm">
+					{{ form_row(form.biblio)}}
+				</div>
+			</div>
+
+			<button type="submit" class="btn btn-primary">Ajouter l'article</button>
+			<br>
+
+			<br>
+
+		</div>
+
+		{{ form_end(form) }}
+
+
+		<divclass="cardcard-cascadenarrower">
+
+
+			{#**************************************************************************************************************************************#}
+
+
+			<div class="table-wrapper">
+
+				<table class="table table-striped ">
+
+					<thead>
+						<tr>
+							<th>Auteur</th>
+							<th>Titre</th>
+							<th>année</th>
+							<th>numéro</th>
+							<th>identifiant</th>
+
+
+							<th></th>
+
+							<th></th>
+							<th></th>
+
+
+						</tr>
+					</thead>
+
+					<tbody>
+
+						{% for ligne in result %}
+							<tr>
+								<td>{{ ligne.getTitre }}</td>
+								<td>{{ ligne.getAuteur }}</td>
+								<td>{{ ligne.getPeriode }}</td>
+								<td>{{ ligne.getNumeroParent }}</td>
+								<td>{{ ligne.getHrefParent }}</td>
+
+
+								<td>
+									<a href={{path('ArticleEDIT', {'id':ligne.id } )}} title="Editer">
+										<i class="fas fa-marker"></i>
+									</a>
+								</td>
+
+								<td>
+									<a href={{path('ArticleDELETE', {'id':ligne.id } )}} onclick="return confirm('Voulez-vous me supprimer ?')" title="Supprimer?">
+										<i class="fas fa-trash"></i>
+									</a>
+								</td>
+
+								<td>
+									<a href={{path('getXML', {'id':ligne.id } )}} title=" voir le xml">
+										<i class="fas fa-file"></i>
+									</a>
+								</td>
+
+
+							</tr>
+
+						{% endfor %}
+
+					</tbody>
+
+				</table>
+
+				<p></p>
+				<p></p>
+			</div>
+
+		</div>
+
+
+	{% endblock %}

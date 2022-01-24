@@ -1,0 +1,239 @@
+{#**************************************************************************************************************************************#}
+{% extends 'base.html.twig' %}
+{#**************************************************************************************************************************************#}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+
+	<div class="class row">
+		<div class="class col">
+
+
+			<div id="accordion">
+				<div class="card">
+					<div class="card-header" id="headingOne">
+						<h5 class="mb-0">
+							<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne,#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+								Rechercher
+							</button>
+						</h5>
+					</div>
+
+					<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+						<div class="card-body">
+							{{ form_start(form) }}
+
+
+							<div class="form-group">
+								<div class="class row">
+									<div class="col-2">
+										{{ form_row(form.rechercher) }}
+									</div>
+									<div class="col-2">
+										{{ form_row(form.LenguageIn, {'label':false}) }}
+									</div>
+									<div class="col-2">
+
+										{{ form_row(form.LenguageOut, {'label':false}) }}
+									</div>
+
+									<div class="col-6">
+										{{ form_row(form.search, {'attr': {'placeholder' :  'Rechercher un mot' }}) }}
+									</div>
+
+
+								</div>
+								<div class="row">
+									<div class="col">
+										{{ form_row(form.canDictio) }}
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group"></div>
+
+
+							{{ form_end(form) }}
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="class col">
+
+			<div id="accordion">
+
+
+				<div class="card">
+					<div class="card-header" id="headingTwo">
+						<h5 class="mb-0">
+							<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne,#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+								Résultat de la recherche
+								{{message}}
+
+							</button>
+						</h5>
+					</div>
+					<div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+						<div class="card-body">
+
+							{% if search !='' %}
+
+								<div id="choix">
+
+
+									<table class="table table-sm">
+
+										<tbody>
+											<tr>
+												<td>
+													Langue de recherche :
+
+													<span class="badge bg-secondary">{{SLeng}}</span>
+												</td>
+
+
+												<td>
+													Langue de comparaison :
+													<span class="badge bg-secondary">{{DLeng}}</span>
+												</td>
+
+											</tr>
+											<tr>
+												<td>Mot recherché :
+
+													{{search}}
+													<span class="badge bg-secondary">
+														({{ searchCount }})</span>
+												</td>
+
+												<td>
+													Mot traduit :
+													<b>{{result}}</b>
+													<span class="badge bg-secondary">
+														({{ comparedCount }})</span>
+												</td>
+											</tr>
+
+											<tr>
+												<td>
+													Synonymes :
+
+													<b style="color:blue;">
+														{{equals}}
+													</b>
+												</td>
+
+
+												<td>
+													Autres Traductions:
+													<b style="color:tomato;">
+														{{results}}
+													</b>
+												</td>
+
+											</tr>
+
+
+											<tr>
+												<td></td>
+
+												<td>
+
+													Nom propre :
+													<b style="color:green;">
+														{{search}}
+													</b>
+
+													<span class="badge bg-secondary">
+														({{ ProperCount }})</span>
+												</td>
+
+											</tr>
+
+										</tbody>
+									</table>
+
+
+								</div>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><br><div class="class row">
+		<div class="class col-2">
+			<div class="alert alert-primary" role="alert">
+				<div class="form-check form-switch"><input class="form-check-input" type="checkbox" value="" id="CRight"><label class="form-check-label" for="CRight">Agrandir</label>
+				</div>
+			</div>
+		</div>
+		<div class="class col-2">
+			<div class="alert alert-info" role="alert">
+				<div class="form-check form-switch"><input class="form-check-input" type="checkbox" value="" id="CLeft"><label class="form-check-label" for="CLeft">Agrandir</label>
+				</div>
+			</div>
+		</div>
+		<div class="class col-2">
+			<div class="alert alert-warning" role="alert">
+				<div class="form-check form-switch"><input class="form-check-input" type="checkbox" value="" id="CScroll" checked><label class="form-check-label" for="CScroll">Auto scroll</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col" id="checkLeft">
+			<div class="alert alert-primary" role="alert" id='div1' style=" {{ autoscroll }} ">{{ origin | raw}}</div>
+		</div>
+		<div class="col" id="checkRight">
+			<div class="alert alert-info" role="alert" id='div2' style="height: 950px; {{ autoscroll }}">{{ compared  | raw}}</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('#CScroll').change(function () {
+if (this.checked) {
+document.getElementById("div1").style = "height: 950px; overflow-y: auto;";
+document.getElementById("div2").style = "height: 950px; overflow-y: auto;";
+
+
+} else {
+
+document.getElementById("div1").style = "";
+document.getElementById("div2").style = "";
+
+
+}
+
+});
+
+
+$(function () {
+$('#CLeft').change(function () {
+$('#checkLeft').toggle()
+})
+});
+
+
+$(function () {
+$('#CRight').change(function () {
+$('#checkRight').toggle()
+
+
+})
+});
+
+$("#div1").scroll(function () {
+$("#div2").scrollTop($("#div1").scrollTop());
+$("#div2").scrollLeft($("#div1").scrollLeft());
+});
+
+$("#div2").scroll(function () {
+$("#div1").scrollTop($("#div2").scrollTop());
+$("#div1").scrollLeft($("#div2").scrollLeft());
+});
+	</script>
+{% endblock %}

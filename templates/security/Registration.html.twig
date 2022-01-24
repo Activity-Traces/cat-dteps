@@ -1,0 +1,34 @@
+{#**************************************************************************************************************************************#}
+{#**************************************************************************************************************************************#}
+{% extends 'Header.html.twig' %}
+
+
+	{% block body %}
+
+
+		<div class="d-flex p-2  justify-content-center"> <div class="col-3">
+			<div class="p-3 border bg-light">
+
+				<p class="h5">Nouveau utilisateur? inscrivez vous</p>
+
+				<div class="form-group">
+					{{ form_start(form) }}
+
+
+					<p>
+						{{ form_row(form.email, { 'attr': {'placeholder' : "email"}}) }}
+						{{ form_row(form.password, {'attr': {'placeholder' : "mot de passe"}}) }}
+						{{ form_row(form.confirm_password, {'attr': {'placeholder' : "confirmer votre mot de passe"}}) }}
+
+						<button type="submit" class="btn">
+							Inscription</button>
+						{{ form_end(form) }}
+					</p>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	{#**************************************************************************************************************************************#}
+
+{% endblock %}

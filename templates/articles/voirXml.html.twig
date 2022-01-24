@@ -1,0 +1,33 @@
+{#**************************************************************************************************************************************#}
+{% extends 'base.html.twig' %}
+{#**************************************************************************************************************************************#}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+
+	<div class="row g-3">
+		<div class="col-sm">
+
+
+			<div class="alert alert-primary" role="alert">
+
+				{{ result }}
+			</div>
+
+
+		</div>
+		<div class="col-sm">
+
+
+			<div class="alert alert-info" role="alert">
+
+				{{ result | raw}}
+			</div>
+
+
+		</div>
+
+	</div>
+{% endblock %}

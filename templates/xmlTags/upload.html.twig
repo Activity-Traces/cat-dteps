@@ -1,0 +1,17 @@
+{#**************************************************************************************************************************************#}
+{% extends 'base.html.twig' %}
+{#**************************************************************************************************************************************#}
+
+{% block title %}{% endblock %}
+
+
+{% block body %}
+	{{ form_start(form) }}
+
+
+	{{ form_row(form.Folder)}}
+
+	<button type="submit" class="btn btn-primary">Charger les fichiers sélectionnés</button>
+
+	{{ form_end(form) }}
+{% endblock %}

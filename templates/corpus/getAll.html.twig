@@ -1,0 +1,22 @@
+{#**************************************************************************************************************************************#}
+{% extends 'base.html.twig' %}
+{#**************************************************************************************************************************************#}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+	{% set RELATED = 'Corpus' %}
+	{% set PLACEHOLDER = 'Trouver un corpus' %}
+
+	{% set ADD = 'CAdd' %}
+	{% set DELETEALL = 'CDeleteAll' %}
+	{% set GET = 'CGet' %}
+	{% set EDIT = 'CEdit' %}
+	{% set DELETE = 'CDelete' %}
+	{% set ALLOW = 'CAllow' %}
+	{% set SHARED = true %}
+
+	{{ include('includes/getAll.html.twig')  | raw}}
+
+{% endblock %}

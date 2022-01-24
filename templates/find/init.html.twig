@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+	{#**************************************************************************************************************************************#}
+	{# create new indicator #}
+	{#**************************************************************************************************************************************#}
+	{{ form_start(form) }}
+
+		<div class="container"> <br><hr>
+
+		<div class="row">
+
+			{{ form_row(form.corpus, { 'label': 'Merci de choisir un corpus' })}}
+
+		</div>
+		<br><hr>
+
+		<div class="row">
+
+			{{ form_row(form.done,   {'label': 'Charger'}) }}
+
+		</div>
+
+	</div>
+
+
+	{{ form_end(form) }}</script>{% endblock %}
