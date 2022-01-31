@@ -179,11 +179,6 @@ class CompareSourcesController extends AbstractController
                     $equalsWord2 = $translate->getSynonym();
                     unset($translate);
 
-
-
-                    $word1 =
-                        $word2 =  $params[1];
-
                     preg_match_all('/' . $params[0] . '(.*?) ' . $params[1] . '/', $origin, $match);
                     foreach ($match[0] as $line) {
                         $origin = str_ireplace($line, '<mark>' . $line . '</mark>', $origin);

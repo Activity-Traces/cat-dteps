@@ -52,7 +52,7 @@ class TransformCorpusController extends AbstractController
 
         closedir($dir);
 
-        return $this->render('test/index.html.twig');
+        return $this->render('testsing/index.html.twig');
     }
 
 
